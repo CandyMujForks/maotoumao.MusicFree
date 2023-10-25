@@ -1,5 +1,6 @@
+import Theme from '@/core/theme';
 import React from 'react';
-import {StyleProp, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface IHorizonalSafeAreaViewProps {
@@ -11,8 +12,20 @@ export default function HorizonalSafeAreaView(
     props: IHorizonalSafeAreaViewProps,
 ) {
     const {children, style, mode} = props;
+    const theme = Theme.useTheme();
+    console.log(theme);
     return (
-        <SafeAreaView style={style} mode={mode} edges={['right', 'left']}>
+        <SafeAreaView
+            style={StyleSheet.compose(
+                style,
+                theme.id === 'custom'
+                    ? {}
+                    : {
+                          backgroundColor: theme.colors.pageBackground,
+                      },
+            )}
+            mode={mode}
+            edges={['right', 'left']}>
             {children}
         </SafeAreaView>
     );

@@ -365,13 +365,19 @@ const getFakeNextTrack = () => {
                 : undefined;
     }
 
+    console.log('musicQueue', track);
     if (track) {
         return produce(track, _ => {
             _.url = SoundAsset.fakeAudio;
             _.$ = internalFakeSoundKey;
         });
     } else {
-        return {url: SoundAsset.fakeAudio, $: internalFakeSoundKey} as Track;
+        return {
+            url: SoundAsset.fakeAudio,
+            $: internalFakeSoundKey,
+            artist: '',
+            title: '',
+        } as Track;
     }
 };
 

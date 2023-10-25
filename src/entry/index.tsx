@@ -16,6 +16,7 @@ import {PortalHost} from '@/components/base/portal';
 import globalStyle from '@/constants/globalStyle';
 import Theme from '@/core/theme';
 import {BootstrapComp} from './useBootstrap';
+import {Platform} from 'react-native';
 
 /**
  * 字体颜色
@@ -40,7 +41,11 @@ export default function Pages() {
                                 statusBarColor: 'transparent',
                                 statusBarTranslucent: true,
                                 headerShown: false,
-                                animation: 'slide_from_right',
+                                animation:
+                                    Platform.OS === 'ios' &&
+                                    theme.id === 'custom'
+                                        ? 'fade'
+                                        : 'slide_from_right',
                                 animationDuration: 100,
                             }}>
                             {routes.map(route => (

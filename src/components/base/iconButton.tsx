@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ColorKey, iconSizeConst, colorMap} from '@/constants/uiConst';
 import {IconProps} from 'react-native-vector-icons/Icon';
 import {TapGestureHandler} from 'react-native-gesture-handler';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import useColors from '@/hooks/useColors';
 
 interface IIconButtonProps extends IconProps {
@@ -47,18 +47,25 @@ export default function IconButton(props: IIconButtonProps) {
     const size = iconSizeConst[sizeType];
 
     return (
-        <Icon
-            {...props}
-            color={color ?? colors[colorMap[fontColor]]}
-            style={[{minWidth: size}, styles.textCenter, style]}
-            size={size}
-        />
+        <View style={styles.viewCenter}>
+            <Icon
+                {...props}
+                color={color ?? colors[colorMap[fontColor]]}
+                style={[{minWidth: size}, styles.textCenter, style]}
+                size={size}
+            />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     textCenter: {
-        height: '100%',
+        // height: '100%',
         textAlignVertical: 'center',
+    },
+    viewCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

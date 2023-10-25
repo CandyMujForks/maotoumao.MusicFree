@@ -1,4 +1,10 @@
-import {View, TouchableOpacity, StyleSheet, StatusBar} from 'react-native';
+import {
+    View,
+    TouchableOpacity,
+    StyleSheet,
+    StatusBar,
+    Platform,
+} from 'react-native';
 import React, {useState} from 'react';
 import SortableFlatList from '@/components/base/SortableFlatList';
 import ThemeText from '@/components/base/themeText';
@@ -14,7 +20,8 @@ import AppBar from '@/components/base/appBar';
 import useColors from '@/hooks/useColors';
 
 const ITEM_HEIGHT = rpx(96);
-const marginTop = rpx(188) + (StatusBar.currentHeight ?? 0);
+const marginTop =
+    rpx(Platform.OS === 'ios' ? 300 : 188) + (StatusBar.currentHeight ?? 0);
 
 export default function PluginSort() {
     const plugins = PluginManager.useSortedPlugins();
