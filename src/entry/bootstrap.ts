@@ -104,6 +104,23 @@ async function _bootstrap() {
     // Linking.addEventListener('url', (data) => {
     //     console.log(data);
     // })
+    const urls = Config.useConfig('setting.plugin.subscribeUrl') ?? '';
+    try {
+        const url = JSON.parse(urls);
+        // 默认插件
+        Config.set(
+            'setting.plugin.subscribeUrl',
+            JSON.stringify([
+                {
+                    name: '默认',
+                    url: 'https://gitee.com/maotoumao/MusicFreePlugins/raw/master/plugins.json',
+                },
+                ...url,
+            ]),
+        );
+    } catch {
+        errorLog('无法解析', urls);
+    }
 
     ErrorUtils.setGlobalHandler(error => {
         errorLog('未捕获的错误', error);
